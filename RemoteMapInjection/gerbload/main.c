@@ -326,18 +326,6 @@ _EndOfFunction:
 }
 
 
-
-BOOL IsPayloadRunning() {
-
-	HANDLE hMutex = CreateMutexA(NULL, FALSE, PAYLOAD_CONTROL_STRING);
-
-	if (hMutex != NULL && GetLastError() == ERROR_ALREADY_EXISTS)
-		return TRUE;
-	else
-		return FALSE;
-}
-
-
 int wmain() {
 
 	// RemoteMap Injection
