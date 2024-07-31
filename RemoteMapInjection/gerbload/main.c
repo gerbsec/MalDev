@@ -171,9 +171,6 @@ BOOL CreatePPidSpoofedProcess(IN HANDLE hParentProcess, IN LPCSTR lpProcessName,
 	SiEx.lpAttributeList = pThreadAttList;
 
 	//-------------------------------------------------------------------------------
-
-	printf("[i] Running : \"%s\" ... ", lpPath);
-
 	if (!CreateProcessA(
 		NULL,
 		lpPath,
